@@ -1,7 +1,7 @@
 # TKInter
 This is a university ranking work. Rating work - independent written work, requiring the student to apply skills acquired during the study of the discipline «High-level programming methods» knowledge and skills in solving practical problems in high-level programming language using standard algorithmic constructs. The tasks are oriented towards developing skills of programming in Python, logical and analytical thinking.
 
-##Task
+## Task
 Write a program in the Python programming language, which should provide the following features:
 1. The title in the main window changes from your last name to your ID and back.
 2. When you load the program, the main window shows a triangle whose coordinates x are the last six digits of your ID, which is three double digits, and whose coordinates y are the last six digits of your ID divided by 3, which is three double digits. The shape of the triangle should be filled with solid paint.
@@ -10,3 +10,8 @@ Write a program in the Python programming language, which should provide the fol
 5. When the user changes the size of a window, the widgets are moved to the relative new size.
 
 This is what I should get as a result of the work:
+
+<img src="https://github.com/StuLolka/-TKInter/blob/main/ForReadme/whatShouldIGet.png">
+
+
+## The task is still in progress.
