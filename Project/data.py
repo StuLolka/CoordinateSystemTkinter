@@ -30,11 +30,11 @@ class Data:
         x1 = int(self.__id[2:4])
         x2 = int(self.__id[4:6])
         x3 = int(self.__id[6:8])
-        return (x1, x2, x3)
+        return (x1, x2, x3, x1)
 
     def get_y_coordinates(self):
         number = str(int(self.__id) // 3)
         y1 = int(number[2:4])
         y2 = int(number[4:6])
         y3 = int(number[6:8])
-        return (y1, y2, y3)
+        return (y1, y2, y3, y1)

@@ -1,4 +1,3 @@
-import tkinter as tk
 from data import Data
 from triangle import Triangle
 from helpers import *
@@ -9,6 +8,7 @@ data = Data()
 win = setup_win(data.get_surname())
 
 def change_title(event):
+    print(win.winfo_height(), win.winfo_width())
     global isSurnameShowed
     global data
     if isSurnameShowed:
@@ -18,41 +18,61 @@ def change_title(event):
     isSurnameShowed = not isSurnameShowed
 
 frame = setup_main_frame(win, change_title)
-canvas = setup_canvas(frame)
+graph_frame = setup_graph_frame(frame)
 
-x1, x2, x3 = data.get_x_coordinates()
-y1, y2, y3 = data.get_y_coordinates()
+x = data.get_x_coordinates()
+y = data.get_y_coordinates()
 
-triangle = Triangle((x1, y1), (x2, y2), (x3,  y3), canvas)
+triangle = Triangle(x, y, graph_frame)
 var = tk.StringVar() # https://stackoverflow.com/questions/5071559/tkinter-radio-button-initialization-bug
+errorMessage = tk.StringVar()
+error_label = tk.Label(frame, foreground="red", textvariable=errorMessage, wraplength=250)
+error_label.grid(row=1, column=0)
 
 def selection():
-   selected = var.get()
-   triangle.change_color(selected)
+    selected = var.get()
+    triangle.change_color(selected)
 
 def setup_radiobutton():
-
     radiobutton_frame = tk.Frame(frame, highlightbackground="black", highlightthickness=1)
-    radiobutton_frame.grid(row=0, column=2, sticky=tk.NE)
+    radiobutton_frame.grid(row=0, column=1, sticky=tk.NW)
 
     global var
     var = tk.StringVar()
-    var.set(list(data.get_colors())[0])
+    var.set(data.get_first_hex())
     colors = data.get_colors()
     for r, name in enumerate(colors):
         tk.Radiobutton(radiobutton_frame, text=name, variable=var, value=colors[name], padx=10, pady=5, command=selection) \
-            .grid(row=r + 1, column=1, sticky=tk.W)
+            .grid(row=r + 1, column=0, sticky=tk.W)
 
 def check(event):
-    triangle.change_coordinates((x1_entry.get(), y1_entry.get()), (x2_entry.get(), y2_entry.get()), (x3_entry.get(), y3_entry.get()))
+    errorMessage.set("")
+    try:
+        x1 = float(x1_entry.get())
+        x2 = float(x2_entry.get())
+        x3 = float(x3_entry.get())
+        y1 = float(y1_entry.get())
+        y2 = float(y2_entry.get())
+        y3 = float(y3_entry.get())
+        triangle.change_coordinates((x1, x2, x3, x1), (y1, y2, y3, y1))
+    except:
+        errorMessage.set("Error")
 
 def setup_entries():
     text_frame = tk.Frame(frame, width=200,  height=400)
-    text_frame.grid(row=1, column=0, sticky=tk.W)
+    text_frame.grid(row=2, column=0, sticky=tk.W)
+    text_frame.columnconfigure(0, weight=2)
+    text_frame.columnconfigure(1, weight=2)
+    text_frame.columnconfigure(2, weight=2)
+    text_frame.rowconfigure(0, weight=2)
+    text_frame.rowconfigure(1, weight=2)
+    text_frame.rowconfigure(2, weight=2)
+    text_frame.rowconfigure(3, weight=2)
 
-    x = ["x1:", "x2:", "x3:"]
-    y = ["y1:", "y2:", "y3:"]
-    for i, name in enumerate(x):
+
+    x_text = ["x1:", "x2:", "x3:"]
+    y_text = ["y1:", "y2:", "y3:"]
+    for i, name in enumerate(x_text):
         tk.Label(text_frame, text=name).grid(row=0, column=i, sticky=tk.W, padx=10)
 
     x1_entry = tk.Entry(text_frame, width=10, highlightbackground="black", highlightthickness=1)
@@ -63,15 +83,15 @@ def setup_entries():
     x2_entry.bind('<KeyRelease>', check)
     x3_entry.bind('<KeyRelease>', check)
 
-    x1_entry.insert(0, x1)
-    x2_entry.insert(0, x2)
-    x3_entry.insert(0, x3)
+    x1_entry.insert(0, x[0])
+    x2_entry.insert(0, x[1])
+    x3_entry.insert(0, x[2])
 
     x1_entry.grid(row=1, column=0, padx=10)
     x2_entry.grid(row=1, column=1, padx=10)
     x3_entry.grid(row=1, column=2, padx=10)
 
-    for i, name in enumerate(y):
+    for i, name in enumerate(y_text):
         tk.Label(text_frame, text=name).grid(row=2, column=i, sticky=tk.W, padx=10)
 
     y1_entry = tk.Entry(text_frame, width=10, highlightbackground="black", highlightthickness=1)
@@ -82,9 +102,9 @@ def setup_entries():
     y2_entry.bind('<KeyRelease>', check)
     y3_entry.bind('<KeyRelease>', check)
 
-    y1_entry.insert(0, y1)
-    y2_entry.insert(0, y2)
-    y3_entry.insert(0, y3)
+    y1_entry.insert(0, y[0])
+    y2_entry.insert(0, y[1])
+    y3_entry.insert(0, y[2])
 
     y1_entry.grid(row=3, column=0, padx=10)
     y2_entry.grid(row=3, column=1, padx=10)
