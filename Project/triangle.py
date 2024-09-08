@@ -3,7 +3,6 @@ import tkinter as tk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,
 NavigationToolbar2Tk)
-import matplotlib.pyplot as plt
 
 #  https://github.com/matplotlib/matplotlib/issues/17157
 class Triangle:
@@ -54,7 +53,6 @@ class Triangle:
         ax.set_xlabel('x', loc='right', color='red')
         ax.set_ylabel('y', loc='top', color='red', rotation=0)
         ax.xaxis.set_label_coords(1, 0)
-        # ax.set_xticklabels([0, "(0;0)"])
         ax.set_xticks([0, 0])  # just get and reset whatever you already have
         ax.set_xticklabels([0, "(0;0)"])  # set the new/modified labels
         ax.set_yticks([])
