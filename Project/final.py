@@ -34,6 +34,7 @@ def selection():
     triangle.change_color(selected)
 
 def setup_radiobutton():
+    font = tk.font.Font(family="Yu Gothic UI semibold", size=12)
     radiobutton_frame = tk.Frame(frame, highlightbackground="black", highlightthickness=1)
     radiobutton_frame.grid(row=0, column=1, sticky=tk.NW)
 
@@ -42,7 +43,7 @@ def setup_radiobutton():
     var.set(data.get_first_hex())
     colors = data.get_colors()
     for r, name in enumerate(colors):
-        tk.Radiobutton(radiobutton_frame, text=name, variable=var, value=colors[name], padx=10, pady=5, command=selection) \
+        tk.Radiobutton(radiobutton_frame, text=name, variable=var, value=colors[name], padx=10, pady=5, command=selection, font=font) \
             .grid(row=r + 1, column=0, sticky=tk.W)
 
 def check(event):
@@ -61,23 +62,17 @@ def check(event):
 def setup_entries():
     text_frame = tk.Frame(frame, width=200,  height=400)
     text_frame.grid(row=2, column=0, sticky=tk.W)
-    text_frame.columnconfigure(0, weight=2)
-    text_frame.columnconfigure(1, weight=2)
-    text_frame.columnconfigure(2, weight=2)
-    text_frame.rowconfigure(0, weight=2)
-    text_frame.rowconfigure(1, weight=2)
-    text_frame.rowconfigure(2, weight=2)
-    text_frame.rowconfigure(3, weight=2)
 
+    font = tk.font.Font(family="Segoe UI Semibold", size=10, slant="italic")
 
     x_text = ["x1:", "x2:", "x3:"]
     y_text = ["y1:", "y2:", "y3:"]
     for i, name in enumerate(x_text):
-        tk.Label(text_frame, text=name).grid(row=0, column=i, sticky=tk.W, padx=10)
+        tk.Label(text_frame, text=name, font=font).grid(row=0, column=i, sticky=tk.W, padx=10)
 
-    x1_entry = tk.Entry(text_frame, width=10, highlightbackground="black", highlightthickness=1)
-    x2_entry = tk.Entry(text_frame, width=10, highlightbackground="black", highlightthickness=1)
-    x3_entry = tk.Entry(text_frame, width=10, highlightbackground="black", highlightthickness=1)
+    x1_entry = tk.Entry(text_frame, width=15, highlightbackground="black", highlightthickness=1)
+    x2_entry = tk.Entry(text_frame, width=15, highlightbackground="black", highlightthickness=1)
+    x3_entry = tk.Entry(text_frame, width=15, highlightbackground="black", highlightthickness=1)
 
     x1_entry.bind('<KeyRelease>', check)
     x2_entry.bind('<KeyRelease>', check)
@@ -87,16 +82,16 @@ def setup_entries():
     x2_entry.insert(0, x[1])
     x3_entry.insert(0, x[2])
 
-    x1_entry.grid(row=1, column=0, padx=10)
-    x2_entry.grid(row=1, column=1, padx=10)
-    x3_entry.grid(row=1, column=2, padx=10)
+    x1_entry.grid(row=1, column=0, pady=2, ipady=2, padx=10)
+    x2_entry.grid(row=1, column=1, pady=2, ipady=2, padx=10)
+    x3_entry.grid(row=1, column=2, pady=2, ipady=2, padx=10)
 
     for i, name in enumerate(y_text):
-        tk.Label(text_frame, text=name).grid(row=2, column=i, sticky=tk.W, padx=10)
+        tk.Label(text_frame, text=name, font=font).grid(row=2, column=i, sticky=tk.W, padx=10, pady=1)
 
-    y1_entry = tk.Entry(text_frame, width=10, highlightbackground="black", highlightthickness=1)
-    y2_entry = tk.Entry(text_frame, width=10, highlightbackground="black", highlightthickness=1)
-    y3_entry = tk.Entry(text_frame, width=10, highlightbackground="black", highlightthickness=1)
+    y1_entry = tk.Entry(text_frame, width=15, highlightbackground="black", highlightthickness=1)
+    y2_entry = tk.Entry(text_frame, width=15, highlightbackground="black", highlightthickness=1)
+    y3_entry = tk.Entry(text_frame, width=15, highlightbackground="black", highlightthickness=1)
 
     y1_entry.bind('<KeyRelease>', check)
     y2_entry.bind('<KeyRelease>', check)
@@ -106,9 +101,9 @@ def setup_entries():
     y2_entry.insert(0, y[1])
     y3_entry.insert(0, y[2])
 
-    y1_entry.grid(row=3, column=0, padx=10)
-    y2_entry.grid(row=3, column=1, padx=10)
-    y3_entry.grid(row=3, column=2, padx=10)
+    y1_entry.grid(row=3, column=0, pady=0, ipady=2, padx=10)
+    y2_entry.grid(row=3, column=1, pady=0, ipady=2, padx=10)
+    y3_entry.grid(row=3, column=2, pady=0, ipady=2, padx=10)
     return (x1_entry,
              x2_entry,
              x3_entry,
