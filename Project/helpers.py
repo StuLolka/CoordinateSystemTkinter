@@ -5,6 +5,7 @@ def setup_win(surname):
     win.title(surname)
     win.geometry("650x450")
     win.eval('tk::PlaceWindow . center')
+    win.minsize(400, 360)
     return win
 
 def setup_main_frame(win, change_title):
@@ -15,5 +16,5 @@ def setup_main_frame(win, change_title):
 
 def setup_graph_frame(frame):
     graph_frame = tk.Frame(frame)
-    graph_frame.grid(row=0, column=0, sticky=tk.NW, padx=5, pady=5)
+    graph_frame.grid(row=0, column=0, sticky=tk.NW, padx=5, pady=5, ipadx=5, ipady=5)
     return graph_frame

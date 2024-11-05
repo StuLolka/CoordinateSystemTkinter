@@ -9,7 +9,7 @@ class Triangle:
     __data = Data()
 
     def __init__(self, x, y, frame):
-        self.__hex = self.__data.get_first_hex()
+        self.__color_hex = self.__data.get_first_hex()
         self.__frame = frame
         self.__x = x
         self.__y = y
@@ -21,13 +21,13 @@ class Triangle:
         self.__ax.clear()
         self.__draw_triangle()
 
-    def change_color(self, hex):
-        self.__hex = hex
+    def change_color(self, color_hex):
+        self.__color_hex = color_hex
         self.__ax.clear()
         self.__draw_triangle()
 
     def __draw_triangle(self):
-        fig = Figure(figsize=(3, 3),
+        fig = Figure(figsize=(2.5, 2.5),
                      dpi=100)
         ax = fig.add_subplot()
         ax.plot(self.__x, self.__y)
@@ -40,8 +40,9 @@ class Triangle:
         ax.spines['top'].set_visible(False)
         ax.xaxis.set_ticks_position('bottom')
         ax.yaxis.set_ticks_position('left')
-        ax.plot(self.__x, self.__y, color=self.__hex)
-        ax.fill(self.__x, self.__y, color=self.__hex)
+
+        ax.plot(self.__x, self.__y, color=self.__color_hex)
+        ax.fill(self.__x, self.__y, color=self.__color_hex)
 
         # make arrows
         ax.plot((1), (0), ls="", marker=">", ms=10, color="red",
