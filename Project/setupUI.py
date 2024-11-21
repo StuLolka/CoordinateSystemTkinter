@@ -25,17 +25,19 @@ def setup_main_frame(win, change_title):
     return frame
 
 def setup_color_buttons(frame, colors, change_color):
+    if not len(colors): return
     color_buttons_frame = tk.Frame(frame, highlightbackground="black", highlightthickness=1)
     color_buttons_frame.grid(row=0, column=1, sticky=tk.NW, pady=5, ipadx=5)
+    color_buttons_frame.columnconfigure(0, weight=1)
 
     color_buttons = []
-    for i, name in enumerate(colors):
+    for index, name in enumerate(colors):
         custom_button = CustomButton(color_buttons_frame, name)
         color_buttons.append(custom_button)
-        custom_button.grid(row=i, column=0, sticky=tk.W)
+        custom_button.grid(row=index, column=0, sticky=tk.W)
         custom_button.configure(command=lambda color=colors[name], button=custom_button: change_color(color, button))
+        color_buttons_frame.rowconfigure(index, weight=1)
     color_buttons[0].set_selected_image()
-
     return color_buttons
 
 def setup_error_label(frame, error_message):

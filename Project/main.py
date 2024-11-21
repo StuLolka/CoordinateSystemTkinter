@@ -1,6 +1,6 @@
+from Project.triangle import Triangle
 from data import Data
 from setupUI import *
-from triangle import Triangle
 
 data = Data()
 win = setup_win(data.get_surname())
@@ -15,17 +15,10 @@ frame = setup_main_frame(win, change_title)
 
 x = data.get_x_coordinates()
 y = data.get_y_coordinates()
-
 triangle = Triangle(data.get_x_coordinates(), data.get_y_coordinates(), frame, data.get_first_hex())
 
 error_message = tk.StringVar()
 setup_error_label(frame, error_message)
-
-def change_color(color_hex, button):
-    for but in color_buttons:
-        but.set_unselected_image()
-    button.set_selected_image()
-    triangle.change_color(color_hex)
 
 def check_coordinates(event):
     error_message.set("")
@@ -41,8 +34,13 @@ def check_coordinates(event):
         error_message.set("Ошибка! Некорректный ввод.")
     event.widget.focus_force()
 
-
-color_buttons = setup_color_buttons(frame, data.get_colors(), change_color)
 x1_entry, x2_entry, x3_entry, y1_entry, y2_entry, y3_entry = setup_entries(frame, check_coordinates, x, y)
 
+def change_color(color_hex, button):
+    for but in color_buttons:
+        but.set_unselected_image()
+    button.set_selected_image()
+    triangle.change_color(color_hex)
+
+color_buttons = setup_color_buttons(frame, data.get_colors(), change_color)
 win.mainloop()
