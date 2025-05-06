@@ -1,4 +1,4 @@
-# TKInter
+# Coordinate system on Python using Tkinter
 
 
 <img src="https://github.com/StuLolka/-TKInter/blob/main/ForReadme/whatShouldIGet.png">
